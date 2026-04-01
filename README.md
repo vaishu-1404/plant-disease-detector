@@ -43,6 +43,21 @@ Farmers and gardeners often struggle to identify plant diseases early. This app 
 
 ---
 
+## 🌿 Try with Sample Leaf Images
+
+You can test the live demo using these example leaf images.
+
+| Disease      | Image                        |
+| ------------ | ---------------------------- |
+| Apple Leaf   | ![](demo-images/apple.JPG)   |
+| Tomato Leaf  | ![](demo-images/tomato.JPG)  |
+| Potato Leaf  | ![](demo-images/potato.jpg)  |
+| Healthy Leaf | ![](demo-images/healthy.JPG) |
+
+Download or screenshot these images and upload them in the live demo.
+
+---
+
 ## 🏗️ Tech Stack
 
 | Layer | Technology |
