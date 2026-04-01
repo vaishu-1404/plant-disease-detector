@@ -26,6 +26,32 @@ Farmers and gardeners often struggle to identify plant diseases early. This app 
 
 ---
 
+## 🖼️ Demo
+
+> Upload a leaf image → Get disease detection + treatment in seconds!
+
+<table>
+<tr>
+<td align="center">
+
+**Upload Leaf Image**
+
+<img src="ui.png" width="400"/>
+
+</td>
+
+<td align="center">
+
+**Prediction Result**
+
+<img src="predict.png" width="400"/>
+
+</td>
+</tr>
+</table>
+
+---
+
 ## 🏗️ Tech Stack
 
 | Layer | Technology |
