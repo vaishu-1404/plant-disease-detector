@@ -114,6 +114,11 @@ You can test the live demo using these example leaf images.
 </td>
 
 <td align="center">
+<b>Peach Leaf</b><br>
+<img src="demo-images/peach.JPG" width="180">
+</td>
+
+<td align="center">
 <b>Healthy Leaf</b><br>
 <img src="demo-images/healthy.JPG" width="180">
 </td>
