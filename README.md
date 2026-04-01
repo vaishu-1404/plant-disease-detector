@@ -1,6 +1,10 @@
 # 🌿 Plant Disease Detector
 
+🚀 Live Demo:
+https://huggingface.co/spaces/Vaishu-1404/plant-disease-detector
+
 An end-to-end deep learning web application that detects plant diseases from leaf images using **EfficientNet-B0** and **Transfer Learning**, served via a **FastAPI** backend with a clean, mobile-responsive UI.
+
 
 ---
 
