@@ -92,6 +92,38 @@ Download or screenshot these images and upload them in the live demo.
 
 ---
 
+## 🌿 Try with Sample Leaf Images
+
+You can test the live demo using these example leaf images.
+
+<table>
+<tr>
+<td align="center">
+<b>Apple Leaf</b><br>
+<img src="demo-images/apple.JPG" width="180">
+</td>
+
+<td align="center">
+<b>Tomato Leaf</b><br>
+<img src="demo-images/tomato.JPG" width="180">
+</td>
+
+<td align="center">
+<b>Potato Leaf</b><br>
+<img src="demo-images/potato.jpg" width="180">
+</td>
+
+<td align="center">
+<b>Healthy Leaf</b><br>
+<img src="demo-images/healthy.JPG" width="180">
+</td>
+</tr>
+</table>
+
+Download or screenshot these images and upload them in the live demo.
+
+---
+
 ## 🏗️ Tech Stack
 
 | Layer | Technology |
