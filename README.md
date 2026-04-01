@@ -47,12 +47,12 @@ Farmers and gardeners often struggle to identify plant diseases early. This app 
 
 You can test the live demo using these example leaf images.
 
-| Disease      | Image                        |
-| ------------ | ---------------------------- |
-| Apple Leaf   | ![](demo-images/apple.JPG)   |
-| Tomato Leaf  | ![](demo-images/tomato.JPG)  |
-| Potato Leaf  | ![](demo-images/potato.jpg)  |
-| Healthy Leaf | ![](demo-images/healthy.JPG) |
+| Disease      | Image                                            |
+| ------------ | ------------------------------------------------ |
+| Apple Leaf   | <img src="demo-images/apple.JPG" width="200"/>   |
+| Tomato Leaf  | <img src="demo-images/tomato.JPG" width="200"/>  |
+| Potato Leaf  | <img src="demo-images/potato.jpg" width="200"/>  |
+| Healthy Leaf | <img src="demo-images/healthy.JPG" width="200"/> |
 
 Download or screenshot these images and upload them in the live demo.
 
