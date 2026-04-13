@@ -80,29 +80,93 @@ transform  = transforms.Compose([
     )
 ])
 
-# Creating API
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
+    import math
+    
     contents = await file.read()
     image = Image.open(io.BytesIO(contents)).convert("RGB")
-    image_tensor = transform(image).unsqueeze(0) #unsqueeze is used to add 1 dimension which is basically like one batch cuz mode expect (batch(32), channel(rgb-3), 224, 244)
-    
+    image_tensor = transform(image).unsqueeze(0)
+
     with torch.no_grad():
         outputs = model(image_tensor)
 
-    _, predicted = torch.max(outputs, 1)
-    predicted_idx = predicted.item()  #.item() is used to convert tensor into python number
+    probabilities = torch.nn.functional.softmax(outputs, dim=1)
 
-    probabilites = torch.nn.functional.softmax(outputs, dim=1)
-    confidence = probabilites[0][predicted_idx].item() * 100
+    # Entropy calculation
+    entropy = -torch.sum(probabilities * torch.log(probabilities + 1e-8)).item()
+    max_entropy = math.log(len(class_names))
+    normalized_entropy = entropy / max_entropy
 
+    # Top 2 predictions
+    top2_probs, top2_indices = torch.topk(probabilities, 2)
+    top1_conf = top2_probs[0][0].item() * 100
+    top2_conf = top2_probs[0][1].item() * 100
+    confidence_gap = top1_conf - top2_conf
+
+    # DEBUG — ab yeh sahi jagah hai
+    print(f"Top1 Conf: {top1_conf:.2f}%")
+    print(f"Top2 Conf: {top2_conf:.2f}%")
+    print(f"Confidence Gap: {confidence_gap:.2f}")
+    print(f"Normalized Entropy: {normalized_entropy:.4f}")
+
+    # OOD Detection
+    if top1_conf < 85 or confidence_gap < 30 or normalized_entropy > 0.4:
+        return {
+            "disease": "Unable to detect",
+            "confidence": f"{top1_conf:.2f}%",
+            "treatment": "Please upload a clearer, close-up leaf image on a plain background.",
+            "warning": "Low confidence — this may not be a plant leaf."
+        }
+
+    predicted_idx = top2_indices[0][0].item()
     disease = class_names[predicted_idx]
     treatment = treatments[disease]
 
     return {
-
         "disease": disease,
-        "confidence": f"{confidence:.2f}%",
+        "confidence": f"{top1_conf:.2f}%",
         "treatment": treatment
     }
-    pass
+
+# Creating API
+# @app.post("/predict")
+# async def predict(file: UploadFile = File(...)):
+#     contents = await file.read()
+#     image = Image.open(io.BytesIO(contents)).convert("RGB")
+#     image_tensor = transform(image).unsqueeze(0) #unsqueeze is used to add 1 dimension which is basically like one batch cuz mode expect (batch(32), channel(rgb-3), 224, 244)
+    
+#     with torch.no_grad():
+#         outputs = model(image_tensor)
+
+#     _, predicted = torch.max(outputs, 1)
+#     predicted_idx = predicted.item()  #.item() is used to convert tensor into python number
+
+#     probabilites = torch.nn.functional.softmax(outputs, dim=1)
+#     confidence = probabilites[0][predicted_idx].item() * 100
+
+#     disease = class_names[predicted_idx]
+#     treatment = treatments[disease]
+
+#     top2_probs, top2_indices = torch.topk(probabilites, 2)
+#     top1_conf = top2_probs[0][0].item() * 100
+#     top2_conf = top2_probs[0][1].item() * 100
+#     confidence_gap = top1_conf - top2_conf
+
+#     predicted_idx = top2_indices[0][0].item()
+#     disease = class_names[predicted_idx]
+#     treatment = treatments[disease]
+
+#     if top1_conf < 70 or confidence_gap < 15:
+#         return {
+#             "disease": "Unable to detect",
+#             "confidence": f"{top1_conf:.2f}%",
+#             "treatment": "Please upload a clearer, close-up leaf image on plain background."
+#         }
+
+#     return {
+#         "disease": disease,
+#         "confidence": f"{top1_conf:.2f}%",
+#         "treatment": treatment
+#     }
+#     pass
