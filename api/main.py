@@ -6,8 +6,11 @@ import torchvision.models as models
 import torch.nn as nn
 import json 
 import io
+import os
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
+load_dotenv()
 app = FastAPI()
 
 app.add_middleware(
@@ -66,7 +69,7 @@ with open("model/class_names.json","r") as f:
 model = models.efficientnet_b0(weights=None)
 model.classifier[1] = nn.Linear(1280, len(class_names))
 
-model.load_state_dict(torch.load("model/plant_disease_model.pth",map_location="cpu"))
+model.load_state_dict(torch.load("model/plant_disease_model_v2.pth",map_location="cpu"))
 model.eval()
 
 
@@ -129,44 +132,34 @@ async def predict(file: UploadFile = File(...)):
         "treatment": treatment
     }
 
-# Creating API
-# @app.post("/predict")
-# async def predict(file: UploadFile = File(...)):
-#     contents = await file.read()
-#     image = Image.open(io.BytesIO(contents)).convert("RGB")
-#     image_tensor = transform(image).unsqueeze(0) #unsqueeze is used to add 1 dimension which is basically like one batch cuz mode expect (batch(32), channel(rgb-3), 224, 244)
-    
-#     with torch.no_grad():
-#         outputs = model(image_tensor)
 
-#     _, predicted = torch.max(outputs, 1)
-#     predicted_idx = predicted.item()  #.item() is used to convert tensor into python number
 
-#     probabilites = torch.nn.functional.softmax(outputs, dim=1)
-#     confidence = probabilites[0][predicted_idx].item() * 100
+# importing chatbot
+from groq import Groq
 
-#     disease = class_names[predicted_idx]
-#     treatment = treatments[disease]
+api_key = os.getenv("GROQ_API_KEY")
+client = Groq(api_key=api_key)
 
-#     top2_probs, top2_indices = torch.topk(probabilites, 2)
-#     top1_conf = top2_probs[0][0].item() * 100
-#     top2_conf = top2_probs[0][1].item() * 100
-#     confidence_gap = top1_conf - top2_conf
+from pydantic import BaseModel
+class ChatRequest(BaseModel):
+    disease: str
+    question: str
 
-#     predicted_idx = top2_indices[0][0].item()
-#     disease = class_names[predicted_idx]
-#     treatment = treatments[disease]
-
-#     if top1_conf < 70 or confidence_gap < 15:
-#         return {
-#             "disease": "Unable to detect",
-#             "confidence": f"{top1_conf:.2f}%",
-#             "treatment": "Please upload a clearer, close-up leaf image on plain background."
-#         }
-
-#     return {
-#         "disease": disease,
-#         "confidence": f"{top1_conf:.2f}%",
-#         "treatment": treatment
-#     }
-#     pass
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "system",
+                "content": f"You are a plant disease expert. The user has a plant infected with {request.disease}. Give short, practical advice. Answer in 2-3 sentences only."
+                # "content": f"If the user asks anything unrelated to plant diseases or agriculture, politely refuse and say you can only answer plant disease related questions."
+            },
+            {
+                "role": "user",
+                "content": request.question
+            }
+        ]
+    )
+    return {"answer": response.choices[0].message.content}
+   

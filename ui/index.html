@@ -19,11 +19,7 @@
             --shadow: rgba(45, 106, 79, 0.15);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Nunito', sans-serif;
@@ -34,346 +30,154 @@
                 radial-gradient(circle at 90% 80%, rgba(183, 228, 199, 0.3) 0%, transparent 50%);
         }
 
-        /* Leaf decorations */
-        body::before {
-            content: '🌿';
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 3rem;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        body::after {
-            content: '🌱';
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 3rem;
-            opacity: 0.15;
-            pointer-events: none;
-        }
+        body::before { content: '🌿'; position: fixed; top: 20px; left: 20px; font-size: 3rem; opacity: 0.15; pointer-events: none; }
+        body::after { content: '🌱'; position: fixed; bottom: 20px; right: 20px; font-size: 3rem; opacity: 0.15; pointer-events: none; }
 
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
+        .container { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            animation: fadeDown 0.6s ease;
-        }
+        header { text-align: center; margin-bottom: 2.5rem; animation: fadeDown 0.6s ease; }
 
         .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: var(--green-dark);
-            color: var(--white);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--green-dark); color: var(--white);
+            padding: 0.5rem 1.2rem; border-radius: 50px;
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; margin-bottom: 1rem;
         }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            color: var(--text-dark);
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--text-dark); line-height: 1.2; margin-bottom: 0.5rem; }
+        h1 span { color: var(--green-mid); }
+        .subtitle { color: var(--text-mid); font-size: 1rem; font-weight: 600; }
 
-        h1 span {
-            color: var(--green-mid);
-        }
-
-        .subtitle {
-            color: var(--text-mid);
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        /* Upload Card */
-        .card {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px var(--shadow);
-            margin-bottom: 1.5rem;
-            animation: fadeUp 0.6s ease 0.1s both;
-        }
+        .card { background: var(--white); border-radius: 24px; padding: 2rem; box-shadow: 0 8px 32px var(--shadow); margin-bottom: 1.5rem; animation: fadeUp 0.6s ease 0.1s both; }
 
         .upload-zone {
-            border: 2.5px dashed var(--green-light);
-            border-radius: 16px;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--green-pale);
-            position: relative;
-            overflow: hidden;
+            border: 2.5px dashed var(--green-light); border-radius: 16px;
+            padding: 2.5rem 1.5rem; text-align: center; cursor: pointer;
+            transition: all 0.3s ease; background: var(--green-pale);
         }
+        .upload-zone:hover, .upload-zone.dragover { border-color: var(--green-mid); background: var(--green-light); transform: scale(1.01); }
+        .upload-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .upload-zone h3 { color: var(--text-dark); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .upload-zone p { color: var(--text-mid); font-size: 0.85rem; }
+        #fileInput { display: none; }
 
-        .upload-zone:hover, .upload-zone.dragover {
-            border-color: var(--green-mid);
-            background: var(--green-light);
-            transform: scale(1.01);
-        }
+        #preview-container { display: none; margin-top: 1.5rem; text-align: center; }
+        #preview { max-width: 100%; max-height: 280px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 16px var(--shadow); }
+        .preview-label { display: block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-mid); font-weight: 600; }
 
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .upload-zone h3 {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-
-        .upload-zone p {
-            color: var(--text-mid);
-            font-size: 0.85rem;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        /* Preview */
-        #preview-container {
-            display: none;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        #preview {
-            max-width: 100%;
-            max-height: 280px;
-            border-radius: 12px;
-            object-fit: cover;
-            box-shadow: 0 4px 16px var(--shadow);
-        }
-
-        .preview-label {
-            display: block;
-            margin-top: 0.6rem;
-            font-size: 0.8rem;
-            color: var(--text-mid);
-            font-weight: 600;
-        }
-
-        /* Button */
         .btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--green-dark);
-            color: var(--white);
-            border: none;
-            border-radius: 14px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1.5rem;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            width: 100%; padding: 1rem; background: var(--green-dark); color: var(--white);
+            border: none; border-radius: 14px; font-family: 'Nunito', sans-serif;
+            font-size: 1rem; font-weight: 800; cursor: pointer; transition: all 0.3s ease;
+            margin-top: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
+        .btn:hover:not(:disabled) { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .btn:hover:not(:disabled) {
-            background: var(--green-mid);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--shadow);
-        }
+        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+        .supported-note { margin-top: 1rem; font-size: 0.78rem; color: var(--text-mid); text-align: center; line-height: 1.6; font-weight: 600; }
 
-        /* Loading */
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: none;
-        }
+        #error-card { display: none; background: #fff5f5; border-radius: 16px; padding: 1.2rem 1.5rem; border-left: 4px solid #fc8181; color: #c53030; font-weight: 600; font-size: 0.9rem; animation: fadeUp 0.4s ease; margin-bottom: 1.5rem; }
 
         /* Result Card */
         #result-card {
-            display: none;
-            background: var(--white);
-            border-radius: 24px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px var(--shadow);
-            animation: fadeUp 0.5s ease;
-            border-left: 5px solid var(--green-mid);
-        }
-
-        .result-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+            display: none; background: var(--white); border-radius: 24px;
+            padding: 2rem; box-shadow: 0 8px 32px var(--shadow);
+            animation: fadeUp 0.5s ease; border-left: 5px solid var(--green-mid);
             margin-bottom: 1.5rem;
         }
 
-        .result-icon {
-            font-size: 2rem;
+        .result-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+        .result-icon { font-size: 2rem; }
+        .result-title { font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-mid); }
+        .disease-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text-dark); font-weight: 700; }
+
+        .confidence-section { margin-bottom: 1.5rem; }
+        .confidence-label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: var(--text-mid); margin-bottom: 0.6rem; }
+        .confidence-bar { height: 10px; background: var(--green-pale); border-radius: 10px; overflow: hidden; }
+        .confidence-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-dark)); border-radius: 10px; width: 0%; transition: width 1s ease; }
+
+        .treatment-box { background: var(--green-pale); border-radius: 14px; padding: 1.2rem; margin-bottom: 1.2rem; }
+        .treatment-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
+        .treatment-text { color: var(--text-dark); font-size: 0.95rem; font-weight: 600; line-height: 1.6; }
+
+        .unable-msg {
+            background: #fff8e1; border-radius: 14px; padding: 1.2rem;
+            margin-bottom: 1.2rem; border-left: 4px solid #f6c90e;
+            color: var(--text-dark); font-size: 0.95rem; font-weight: 600;
+            line-height: 1.8; display: none;
         }
 
-        .result-title {
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--green-mid);
+        /* Divider */
+        .chat-divider {
+            border: none; border-top: 2px dashed var(--green-light);
+            margin: 1.5rem 0;
         }
 
-        .disease-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-top: 0.2rem;
-        }
+        /* Chat section — inside result card */
+        #chat-section { display: none; }
 
-        /* Confidence bar */
-        .confidence-section {
-            margin-bottom: 1.5rem;
+        .chat-header-inline {
+            display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;
         }
+        .chat-title { font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+        .chat-subtitle { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-dark); }
 
-        .confidence-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-mid);
-            margin-bottom: 0.5rem;
+        .suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .suggestion-chip {
+            background: var(--green-pale); color: var(--text-dark);
+            border: 1.5px solid var(--green-light); border-radius: 20px;
+            padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s ease; font-family: 'Nunito', sans-serif;
         }
+        .suggestion-chip:hover { background: var(--green-light); border-color: var(--green-mid); transform: translateY(-1px); }
 
-        .confidence-bar {
-            height: 10px;
-            background: var(--green-pale);
-            border-radius: 50px;
-            overflow: hidden;
+        #chat-messages {
+            min-height: 40px; max-height: 280px; overflow-y: auto;
+            margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.8rem;
         }
+        #chat-messages::-webkit-scrollbar { width: 4px; }
+        #chat-messages::-webkit-scrollbar-track { background: var(--green-pale); border-radius: 4px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 4px; }
 
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--green-mid), var(--green-dark));
-            border-radius: 50px;
-            transition: width 1s ease;
-            width: 0%;
+        .chat-bubble { padding: 0.8rem 1rem; border-radius: 14px; font-size: 0.9rem; font-weight: 600; line-height: 1.6; max-width: 88%; animation: fadeUp 0.3s ease; }
+        .chat-bubble.user { background: var(--green-dark); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-bubble.bot { background: var(--green-pale); color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-bubble.typing { background: var(--green-pale); color: var(--text-mid); align-self: flex-start; font-style: italic; }
+
+        .chat-input-row { display: flex; gap: 0.6rem; }
+
+        #chatInput {
+            flex: 1; padding: 0.8rem 1rem; border: 2px solid var(--green-light);
+            border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 0.9rem;
+            font-weight: 600; color: var(--text-dark); background: var(--green-pale);
+            outline: none; transition: border-color 0.3s ease;
         }
+        #chatInput:focus { border-color: var(--green-mid); background: var(--white); }
+        #chatInput::placeholder { color: var(--text-mid); opacity: 0.7; }
 
-        /* Treatment */
-        .treatment-section {
-            background: var(--green-pale);
-            border-radius: 14px;
-            padding: 1.2rem;
+        #sendBtn {
+            padding: 0.8rem 1.2rem; background: var(--green-dark); color: var(--white);
+            border: none; border-radius: 12px; font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem; font-weight: 800; cursor: pointer; transition: all 0.3s ease;
         }
+        #sendBtn:hover:not(:disabled) { background: var(--green-mid); transform: translateY(-1px); }
+        #sendBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .treatment-label {
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--green-dark);
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
+        .btn-outline { background: transparent; color: var(--green-dark); border: 2px solid var(--green-light); margin-top: 1rem; }
+        .btn-outline:hover { background: var(--green-pale); border-color: var(--green-mid); }
 
-        .treatment-text {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.6;
-        }
+        @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /*Supported Note*/
-        .supported-note {
-            margin-top: 1rem;
-            font-size: 0.78rem;
-            color: var(--text-mid);
-            text-align: center;
-            line-height: 1.6;
-            font-weight: 600;
-        }
+        footer { text-align: center; margin-top: 2rem; color: var(--text-mid); font-size: 0.8rem; font-weight: 600; opacity: 0.7; }
 
-        /* Error */
-        #error-card {
-            display: none;
-            background: #fff5f5;
-            border-radius: 16px;
-            padding: 1.2rem 1.5rem;
-            border-left: 4px solid #fc8181;
-            color: #c53030;
-            font-weight: 600;
-            font-size: 0.9rem;
-            animation: fadeUp 0.4s ease;
-        }
-
-        /* Reset btn */
-        .btn-outline {
-            background: transparent;
-            color: var(--green-dark);
-            border: 2px solid var(--green-light);
-            margin-top: 1rem;
-        }
-
-        .btn-outline:hover {
-            background: var(--green-pale);
-            border-color: var(--green-mid);
-        }
-
-        /* Animations */
-        @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-mid);
-            font-size: 0.8rem;
-            font-weight: 600;
-            opacity: 0.7;
-        }
-
-        /* Mobile */
         @media (max-width: 480px) {
             .container { padding: 1.2rem 1rem; }
             .card, #result-card { padding: 1.5rem; }
-            .upload-zone { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -385,6 +189,7 @@
             <p class="subtitle">Upload a leaf image to detect disease instantly</p>
         </header>
 
+        <!-- Upload Card -->
         <div class="card">
             <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
                 <span class="upload-icon">📷</span>
@@ -392,19 +197,12 @@
                 <p>or click to browse · JPG, PNG supported</p>
                 <input type="file" id="fileInput" accept="image/*">
             </div>
-
-            <p class="supported-note">
-                🌱 Supports: Apple, Tomato, Potato, Grape, Corn, Peach, Pepper, Cherry, Strawberry, Blueberry, Raspberry, Soybean, Orange, Squash
-            </p>
-            <p class="supported-note" style="margin-top: 0.4rem;">
-                📸 Best results with clear, close-up leaf images on plain background
-            </p>
-
+            <p class="supported-note">🌱 Supports: Apple, Tomato, Potato, Grape, Corn, Peach, Pepper, Cherry, Strawberry, Blueberry, Raspberry, Soybean, Orange, Squash</p>
+            <p class="supported-note" style="margin-top: 0.4rem;">📸 Best results with clear, close-up leaf images on plain background</p>
             <div id="preview-container">
                 <img id="preview" src="" alt="Preview">
                 <span class="preview-label">✅ Image ready for analysis</span>
             </div>
-
             <button class="btn" id="predictBtn" onclick="predict()" disabled>
                 <span class="spinner" id="spinner"></span>
                 <span id="btnText">🔍 Detect Disease</span>
@@ -413,6 +211,7 @@
 
         <div id="error-card">⚠️ <span id="errorMsg"></span></div>
 
+        <!-- Result Card — chat bhi andar hai -->
         <div id="result-card">
             <div class="result-header">
                 <span class="result-icon">🌿</span>
@@ -422,7 +221,7 @@
                 </div>
             </div>
 
-            <div class="confidence-section">
+            <div class="confidence-section" id="confidence-section">
                 <div class="confidence-label">
                     <span>Confidence</span>
                     <span id="confidenceText">—</span>
@@ -432,12 +231,43 @@
                 </div>
             </div>
 
-            <div class="treatment-section">
+            <div id="treatment-box" class="treatment-box">
                 <div class="treatment-label">💊 Recommended Treatment</div>
                 <div class="treatment-text" id="treatmentText">—</div>
             </div>
 
-            <button class="btn btn-outline" onclick="reset()">🔄 Try Another Image</button>
+            <div id="unable-msg" class="unable-msg">
+                🚫 This doesn't look like a plant leaf.<br><br>
+                Please upload a <strong>single, clear, close-up photo of one leaf</strong> on a plain background for best results.
+            </div>
+
+            <!-- Chat — sirf disease detect hone pe dikhega -->
+            <div id="chat-section">
+                <hr class="chat-divider">
+                <div class="chat-header-inline">
+                    <span style="font-size: 1.6rem;">🤖</span>
+                    <div>
+                        <div class="chat-title">AI Plant Expert</div>
+                        <div class="chat-subtitle">Ask me about this disease</div>
+                    </div>
+                </div>
+
+                <div class="suggestions">
+                    <button class="suggestion-chip" onclick="askSuggestion('What causes this disease?')">🔍 What causes it?</button>
+                    <button class="suggestion-chip" onclick="askSuggestion('What is the organic treatment?')">🌿 Organic treatment?</button>
+                    <button class="suggestion-chip" onclick="askSuggestion('How can I prevent this disease?')">🛡️ How to prevent?</button>
+                    <button class="suggestion-chip" onclick="askSuggestion('How many days to recover?')">📅 Recovery time?</button>
+                </div>
+
+                <div id="chat-messages"></div>
+
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" placeholder="Ask anything about this disease..." />
+                    <button id="sendBtn" onclick="sendMessage()">Send 💬</button>
+                </div>
+            </div>
+
+            <button class="btn btn-outline" onclick="resetApp()">🔄 Try Another Image</button>
         </div>
 
         <footer>Built with PyTorch + FastAPI · EfficientNet-B0 · 38 Plant Classes</footer>
@@ -449,22 +279,17 @@
         const predictBtn = document.getElementById('predictBtn');
         const preview = document.getElementById('preview');
         const previewContainer = document.getElementById('preview-container');
+        let currentDisease = "";
 
-        // File select
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) showPreview(file);
         });
 
-        // Drag & drop
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.classList.add('dragover');
-        });
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
         uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
         uploadZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadZone.classList.remove('dragover');
+            e.preventDefault(); uploadZone.classList.remove('dragover');
             const file = e.dataTransfer.files[0];
             if (file) showPreview(file);
         });
@@ -483,37 +308,44 @@
             const file = fileInput.files[0];
             if (!file) return;
 
-            // Loading state
             predictBtn.disabled = true;
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('btnText').textContent = 'Analyzing...';
             document.getElementById('result-card').style.display = 'none';
             document.getElementById('error-card').style.display = 'none';
+            document.getElementById('chat-messages').innerHTML = '';
+            currentDisease = "";
 
             try {
                 const formData = new FormData();
                 formData.append('file', file);
 
-                const response = await fetch('http://127.0.0.1:8000/predict', {
-                    method: 'POST',
-                    body: formData
-                });
-
+                const response = await fetch('http://127.0.0.1:8000/predict', { method: 'POST', body: formData });
                 if (!response.ok) throw new Error('Server error');
-
                 const data = await response.json();
 
-                // Show result
-                document.getElementById('diseaseName').textContent = data.disease.replace(/___/g, ' — ').replace(/_/g, ' ');
-                document.getElementById('confidenceText').textContent = data.confidence;
-                document.getElementById('treatmentText').textContent = data.treatment;
-
-                // Animate confidence bar
-                const pct = parseFloat(data.confidence);
                 document.getElementById('result-card').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('confidenceFill').style.width = pct + '%';
-                }, 100);
+
+                if (data.disease === "Unable to detect") {
+                    document.getElementById('diseaseName').textContent = "Unable to detect";
+                    document.getElementById('confidence-section').style.display = 'none';
+                    document.getElementById('treatment-box').style.display = 'none';
+                    document.getElementById('unable-msg').style.display = 'block';
+                    document.getElementById('chat-section').style.display = 'none';
+                } else {
+                    document.getElementById('diseaseName').textContent = data.disease.replace(/___/g, ' — ').replace(/_/g, ' ');
+                    document.getElementById('confidenceText').textContent = data.confidence;
+                    document.getElementById('treatmentText').textContent = data.treatment;
+                    document.getElementById('confidence-section').style.display = 'block';
+                    document.getElementById('treatment-box').style.display = 'block';
+                    document.getElementById('unable-msg').style.display = 'none';
+
+                    const pct = parseFloat(data.confidence);
+                    setTimeout(() => { document.getElementById('confidenceFill').style.width = pct + '%'; }, 100);
+
+                    currentDisease = data.disease;
+                    document.getElementById('chat-section').style.display = 'block';
+                }
 
             } catch (err) {
                 document.getElementById('error-card').style.display = 'block';
@@ -525,14 +357,70 @@
             }
         }
 
-        function reset() {
-            fileInput.value = '';
-            preview.src = '';
-            previewContainer.style.display = 'none';
-            predictBtn.disabled = true;
+        function askSuggestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            if (!question || !currentDisease) return;
+
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            input.value = '';
+
+            addBubble(question, 'user');
+            const typingId = addBubble('🌿 Thinking...', 'typing');
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ disease: currentDisease, question: question })
+                });
+                if (!response.ok) throw new Error('Chat error');
+                const data = await response.json();
+                document.getElementById(typingId).remove();
+                addBubble(data.answer, 'bot');
+            } catch (err) {
+                document.getElementById(typingId).remove();
+                addBubble('Sorry, could not get a response. Please try again!', 'bot');
+            } finally {
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function addBubble(text, type) {
+            const messages = document.getElementById('chat-messages');
+            const id = 'bubble-' + Date.now();
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble ${type}`;
+            bubble.id = id;
+            bubble.textContent = text;
+            messages.appendChild(bubble);
+            messages.scrollTop = messages.scrollHeight;
+            return id;
+        }
+
+        document.getElementById('chatInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        function resetApp() {
+            fileInput.value = ''; preview.src = '';
+            previewContainer.style.display = 'none'; predictBtn.disabled = true;
             document.getElementById('result-card').style.display = 'none';
             document.getElementById('error-card').style.display = 'none';
+            document.getElementById('chat-messages').innerHTML = '';
             document.getElementById('confidenceFill').style.width = '0%';
+            document.getElementById('confidence-section').style.display = 'block';
+            document.getElementById('treatment-box').style.display = 'block';
+            document.getElementById('unable-msg').style.display = 'none';
+            document.getElementById('chat-section').style.display = 'none';
+            currentDisease = "";
         }
     </script>
 </body>
